@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//importar Sweet Alert
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,17 +11,16 @@ import Swal from 'sweetalert2';
 })
 export class FormulComponent implements OnInit {
 
-  //1
+  //inicializo la variable formBuilder
   constructor(private formBuilder: FormBuilder) { }
 
-
-  //2
+  //creo la variable user donde almaceno los datos que recibo del formulario
   user: FormGroup;
   submitted = false;
 
   ngOnInit(): void {
 
-    //3
+    //pongo las condiciones de los campos
     this.user = this.formBuilder.group({
 
       nombre: ['', Validators.required]
@@ -27,20 +28,21 @@ export class FormulComponent implements OnInit {
   }
 
   // creamos un metodo para facilitar el acceso a los controles de formulario desde la plantilla
-  //4
   get f(){
     return this.user.controls;
   }
 
 
-  //5
+  //metodo enviar
   enviarDatos(){
     
     this.submitted = true;
+    //si algun campo no cumple las condiciones
     if(this.user.invalid){
       return;
     }
 
+    //si todos los campos son correctos muestra la siguiente ventana emergente
       Swal.fire('Los datos son correctos');
   }
 
